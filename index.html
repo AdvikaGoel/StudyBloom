@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Bloom - Japanese Study Techniques</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="bloom-icon">🌸</span>
+                <h1>Study Bloom</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="nav-link active" data-section="dashboard">📊 Dashboard</a></li>
+                <li><a href="#pomodoro" class="nav-link" data-section="pomodoro">⏱️ Pomodoro Kai</a></li>
+                <li><a href="#flashcards" class="nav-link" data-section="flashcards">🎴 Flashcards</a></li>
+                <li><a href="#notes" class="nav-link" data-section="notes">✨ AI Notes</a></li>
+                <li><a href="#tracker" class="nav-link" data-section="tracker">📈 Tracker</a></li>
+                <li><a href="#calendar" class="nav-link" data-section="calendar">📅 Calendar</a></li>
+                <li><a href="#exams" class="nav-link" data-section="exams">📝 Exams</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Welcome to Study Bloom 🌸</h2>
+                    <p>Your Japanese-inspired study companion</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="stat-card pink">
+                        <h3>Today's Goal</h3>
+                        <p class="stat-number" id="todayGoal">0/5</p>
+                        <small>sessions completed</small>
+                    </div>
+                    <div class="stat-card peach">
+                        <h3>Study Streak</h3>
+                        <p class="stat-number" id="studyStreak">7</p>
+                        <small>days in a row</small>
+                    </div>
+                    <div class="stat-card lavender">
+                        <h3>Total Hours</h3>
+                        <p class="stat-number" id="totalHours">24.5</p>
+                        <small>this month</small>
+                    </div>
+                    <div class="stat-card mint">
+                        <h3>Flashcards</h3>
+                        <p class="stat-number" id="cardCount">42</p>
+                        <small>created</small>
+                    </div>
+                </div>
+                <div class="quick-start">
+                    <h3>Quick Start</h3>
+                    <div class="quick-buttons">
+                        <button class="btn btn-primary" onclick="switchSection('pomodoro')">Start Pomodoro Kai ⏱️</button>
+                        <button class="btn btn-secondary" onclick="switchSection('flashcards')">Make Flashcard 🎴</button>
+                        <button class="btn btn-secondary" onclick="switchSection('notes')">Create AI Notes ✨</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pomodoro Kai Section -->
+            <section id="pomodoro" class="section">
+                <div class="section-header">
+                    <h2>Pomodoro Kai ⏱️</h2>
+                    <p>Japanese enhanced focus timer - Kai means "improvement"</p>
+                </div>
+                <div class="pomodoro-container">
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring-circle" cx="100" cy="100" r="90" />
+                            </svg>
+                            <div class="timer-text">
+                                <span id="timerDisplay">25:00</span>
+                                <small id="timerPhase">Focus</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" id="startBtn" onclick="startTimer()">Start 🎯</button>
+                        <button class="btn btn-secondary" id="pauseBtn" onclick="pauseTimer()" disabled>Pause ⏸️</button>
+                        <button class="btn btn-secondary" onclick="resetTimer()">Reset 🔄</button>
+                    </div>
+                    <div class="timer-settings">
+                        <div class="setting">
+                            <label>Focus Time (min)</label>
+                            <input type="number" id="focusTime" value="25" min="1" max="60">
+                        </div>
+                        <div class="setting">
+                            <label>Break Time (min)</label>
+                            <input type="number" id="breakTime" value="5" min="1" max="30">
+                        </div>
+                        <div class="setting">
+                            <label>Long Break (min)</label>
+                            <input type="number" id="longBreakTime" value="15" min="1" max="60">
+                        </div>
+                    </div>
+                    <div class="session-info">
+                        <p>Sessions completed: <strong id="sessionsCount">0</strong></p>
+                        <p>Next break in: <strong id="sessionsUntilBreak">4</strong> sessions</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Flashcards Section -->
+            <section id="flashcards" class="section">
+                <div class="section-header">
+                    <h2>Flashcard Maker 🎴</h2>
+                    <p>Create and study with beautiful flashcards</p>
+                </div>
+                <div class="flashcard-container">
+                    <div class="card-creator">
+                        <h3>Create New Card</h3>
+                        <div class="form-group">
+                            <label>Front (Question)</label>
+                            <input type="text" id="cardFront" placeholder="What is the capital of France?">
+                        </div>
+                        <div class="form-group">
+                            <label>Back (Answer)</label>
+                            <textarea id="cardBack" placeholder="Paris" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" id="cardCategory" placeholder="Geography, Biology, etc.">
+                        </div>
+                        <button class="btn btn-primary" onclick="addFlashcard()">Add Card ➕</button>
+                    </div>
+
+                    <div class="card-display">
+                        <div id="flashcardStack" class="flashcard-stack">
+                            <div class="flashcard" onclick="flipCard(this)">
+                                <div class="flashcard-inner">
+                                    <div class="flashcard-front">
+                                        <p>Click to create your first card!</p>
+                                    </div>
+                                    <div class="flashcard-back">
+                                        <p>Study Bloom awaits your knowledge</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-controls">
+                            <button class="btn btn-secondary" onclick="previousCard()">← Previous</button>
+                            <span id="cardCounter">1/1</span>
+                            <button class="btn btn-secondary" onclick="nextCard()">Next →</button>
+                        </div>
+                    </div>
+
+                    <div class="saved-cards">
+                        <h3>Your Decks</h3>
+                        <div id="decksList" class="decks-list">
+                            <p class="empty-state">No decks yet. Create your first card! 🌸</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Notes Section -->
+            <section id="notes" class="section">
+                <div class="section-header">
+                    <h2>AI-Based Notes Maker ✨</h2>
+                    <p>Transform your raw notes into organized, beautiful study material</p>
+                </div>
+                <div class="notes-container">
+                    <div class="notes-input">
+                        <h3>Paste Your Notes</h3>
+                        <textarea id="rawNotes" placeholder="Paste your raw notes, lecture notes, or any text here..." rows="8"></textarea>
+                        <div class="ai-options">
+                            <label><input type="checkbox" id="summarize" checked> Summarize</label>
+                            <label><input type="checkbox" id="highlight"> Highlight Key Points</label>
+                            <label><input type="checkbox" id="createQuestions"> Create Questions</label>
+                        </div>
+                        <button class="btn btn-primary" onclick="processNotes()">✨ Transform Notes</button>
+                    </div>
+
+                    <div class="notes-output">
+                        <div id="notesOutput" class="output-container">
+                            <p class="empty-state">Your organized notes will appear here 📝</p>
+                        </div>
+                        <div class="output-actions">
+                            <button class="btn btn-secondary" id="downloadBtn" style="display:none;" onclick="downloadNotes()">📥 Download</button>
+                            <button class="btn btn-secondary" id="copyBtn" style="display:none;" onclick="copyNotes()">📋 Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Study Tracker Section -->
+            <section id="tracker" class="section">
+                <div class="section-header">
+                    <h2>Study Tracker 📈</h2>
+                    <p>Track your study patterns and progress</p>
+                </div>
+                <div class="tracker-container">
+                    <div class="tracker-entry">
+                        <h3>Log Study Session</h3>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="subject" placeholder="Mathematics, English, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minutes)</label>
+                            <input type="number" id="duration" placeholder="60" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Topic</label>
+                            <input type="text" id="topic" placeholder="Calculus, Shakespeare, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <select id="difficulty">
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" onclick="logSession()">Log Session 📊</button>
+                    </div>
+
+                    <div class="tracker-stats">
+                        <h3>This Week's Summary</h3>
+                        <div class="weekly-chart">
+                            <div class="chart-bar" style="height: 70%;" title="Monday: 350 min"><span>Mon</span></div>
+                            <div class="chart-bar" style="height: 85%;" title="Tuesday: 425 min"><span>Tue</span></div>
+                            <div class="chart-bar" style="height: 60%;" title="Wednesday: 300 min"><span>Wed</span></div>
+                            <div class="chart-bar" style="height: 90%;" title="Thursday: 450 min"><span>Thu</span></div>
+                            <div class="chart-bar" style="height: 75%;" title="Friday: 375 min"><span>Fri</span></div>
+                            <div class="chart-bar" style="height: 40%;" title="Saturday: 200 min"><span>Sat</span></div>
+                            <div class="chart-bar" style="height: 50%;" title="Sunday: 250 min"><span>Sun</span></div>
+                        </div>
+                    </div>
+
+                    <div class="recent-sessions">
+                        <h3>Recent Sessions</h3>
+                        <div id="sessionsList" class="sessions-list">
+                            <div class="session-item">
+                                <div class="session-info-item">
+                                    <strong>Sample Session</strong>
+                                    <small>Mathematics - Calculus</small>
+                                </div>
+                                <div class="session-duration">60 min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendar Section -->
+            <section id="calendar" class="section">
+                <div class="section-header">
+                    <h2>Study Calendar 📅</h2>
+                    <p>Plan your study schedule</p>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="btn-nav" onclick="previousMonth()">← Prev</button>
+                        <h3 id="currentMonth">July 2026</h3>
+                        <button class="btn-nav" onclick="nextMonth()">Next →</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div id="calendarDays" class="calendar-days"></div>
+                </div>
+
+                <div class="schedule-planner">
+                    <h3>Add Study Event</h3>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="eventDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Event</label>
+                        <input type="text" id="eventName" placeholder="e.g., Physics Study Group">
+                    </div>
+                    <button class="btn btn-primary" onclick="addEvent()">Add Event 📌</button>
+                </div>
+            </section>
+
+            <!-- Exams Section -->
+            <section id="exams" class="section">
+                <div class="section-header">
+                    <h2>Exam Tracker 📝</h2>
+                    <p>Track and prepare for your exams</p>
+                </div>
+                <div class="exams-container">
+                    <div class="exam-creator">
+                        <h3>Add Exam</h3>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" id="examSubject" placeholder="Mathematics">
+                        </div>
+                        <div class="form-group">
+                            <label>Date & Time</label>
+                            <input type="datetime-local" id="examDateTime">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (minutes)</label>
+                            <input type="number" id="examDuration" placeholder="120" value="120">
+                        </div>
+                        <div class="form-group">
+                            <label>Topics to Cover</label>
+                            <textarea id="examTopics" placeholder="Chapter 1-5, Practice Problems, etc." rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Preparation (%)</label>
+                            <input type="range" id="prepProgress" min="0" max="100" value="0">
+                            <span id="prepPercent">0%</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addExam()">Add Exam ✏️</button>
+                    </div>
+
+                    <div class="exams-list">
+                        <h3>Upcoming Exams</h3>
+                        <div id="examsList" class="exams">
+                            <p class="empty-state">No exams scheduled yet. Add your first exam! 📚</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
