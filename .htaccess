@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /StudyBloom/
+  
+  # If the requested filename is not a directory
+  RewriteCond %{REQUEST_FILENAME} !-d
+  # If the requested filename is not a file
+  RewriteCond %{REQUEST_FILENAME} !-f
+  # Rewrite everything to index.html
+  RewriteRule ^ index.html [QSA,L]
+  
+  # Add cache headers for better performance
+  <FilesMatch "\.(jpg|jpeg|png|gif|ico|css|js|svg)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+</IfModule>
